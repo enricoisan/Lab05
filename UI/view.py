@@ -1,46 +1,58 @@
 import flet as ft
 
-
 class View(ft.UserControl):
     def __init__(self, page: ft.Page):
         super().__init__()
+
         # page stuff
         self._page = page
         self._page.title = "Lab O5 - segreteria studenti"
         self._page.horizontal_alignment = 'CENTER'
         self._page.theme_mode = ft.ThemeMode.LIGHT
+
         # controller (it is not initialized. Must be initialized in the main, after the controller is created)
         self._controller = None
-        # graphical elements
+
+        # Elementi grafici
         self._title = None
-        self.txt_name = None
-        self.btn_hello = None
-        self.txt_result = None
-        self.txt_container = None
+        self.dd = None
+        self.btn1 = None
+        self.txtMatricola = None
+        self.txtNome = None
+        self.txtCognome = None
+        self.btn2 = None
+        self.btn3 = None
+        self.btn4 = None
+        self.lvTxtOut = None
+
+
 
     def load_interface(self):
         """Function that loads the graphical elements of the view"""
-        # title
-        self._title = ft.Text("Hello World", color="blue", size=24)
+        # Titolo
+        self._title = ft.Text("App Gestione Studenti", color = "blue", size = 24)
         self._page.controls.append(self._title)
 
-        #ROW with some controls
-        # text field for the name
-        self.txt_name = ft.TextField(
-            label="name",
-            width=200,
-            hint_text="Insert a your name"
-        )
+        # Riga 1
+        self.dd = ft.Dropdown(label = "Corso", width = 600)
+        self._controller.filldd()
 
-        # button for the "hello" reply
-        self.btn_hello = ft.ElevatedButton(text="Hello", on_click=self._controller.handle_hello)
-        row1 = ft.Row([self.txt_name, self.btn_hello],
-                      alignment=ft.MainAxisAlignment.CENTER)
-        self._page.controls.append(row1)
+        self.btn1 = ft.ElevatedButton(text = "Cerca iscritti")
+        row1 = ft.Row([self.dd, self.btn1], alignment=ft.MainAxisAlignment.CENTER)
 
-        # List View where the reply is printed
-        self.txt_result = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=True)
-        self._page.controls.append(self.txt_result)
+        # Riga 2
+        self.txtMatricola = ft.TextField(label = "Matricola", width = 250)
+        self.txtNome = ft.TextField(label = "Nome", width = 250, read_only = True)
+        self.txtCognome = ft.TextField(label = "Cognome", width = 250, read_only = True)
+        row2 = ft.Row([self.txtMatricola, self.txtNome, self.txtCognome], alignment=ft.MainAxisAlignment.CENTER)
+
+        # Riga 3
+        self.btn2 = ft.ElevatedButton(text = "Cerca studente")
+        self.btn3 = ft.ElevatedButton(text = "Cerca corsi")
+        self.btn4 = ft.ElevatedButton(text = "Iscrivi")
+        row3 = ft.Row([self.btn2, self.btn3, self.btn4], alignment=ft.MainAxisAlignment.CENTER)
+
+        self._page.add(row1, row2, row3, )
         self._page.update()
 
     @property
