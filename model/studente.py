@@ -17,4 +17,4 @@ class Studente:
         return hash(self.matricola)
 
     def __str__(self):
-        return f"{self.cognome} {self.nome} ({self.matricola}) - {self.CDS}"
+        return f"{self.cognome} {self.nome} ({self.matricola})"

@@ -8,3 +8,12 @@ class Model:
 
     def getAllCorsi(self):
         return DAO.getAllCorsi()
+
+    def getIscrittiCorso(self, corso):
+        return DAO.getIscrittiCorso(corso)
+
+    def getStudente(self, matricola):
+        return DAO.getStudente(matricola)
+
+    def getCorsiStudente(self, matricola):
+        return DAO.getCorsiStudente(matricola)

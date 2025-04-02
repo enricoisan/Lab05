@@ -26,7 +26,6 @@ class View(ft.UserControl):
         self.lvTxtOut = None
 
 
-
     def load_interface(self):
         """Function that loads the graphical elements of the view"""
         # Titolo
@@ -37,7 +36,8 @@ class View(ft.UserControl):
         self.dd = ft.Dropdown(label = "Corso", width = 600)
         self._controller.filldd()
 
-        self.btn1 = ft.ElevatedButton(text = "Cerca iscritti")
+        self.btn1 = ft.ElevatedButton(text = "Cerca iscritti",
+                                      on_click=self._controller.handleb1)
         row1 = ft.Row([self.dd, self.btn1], alignment=ft.MainAxisAlignment.CENTER)
 
         # Riga 2
@@ -47,12 +47,20 @@ class View(ft.UserControl):
         row2 = ft.Row([self.txtMatricola, self.txtNome, self.txtCognome], alignment=ft.MainAxisAlignment.CENTER)
 
         # Riga 3
-        self.btn2 = ft.ElevatedButton(text = "Cerca studente")
-        self.btn3 = ft.ElevatedButton(text = "Cerca corsi")
+        self.btn2 = ft.ElevatedButton(text = "Cerca studente",
+                                      on_click = self._controller.handleb2)
+        self.btn3 = ft.ElevatedButton(text = "Cerca corsi",
+                                      on_click = self._controller.handleb3)
         self.btn4 = ft.ElevatedButton(text = "Iscrivi")
         row3 = ft.Row([self.btn2, self.btn3, self.btn4], alignment=ft.MainAxisAlignment.CENTER)
 
-        self._page.add(row1, row2, row3, )
+        # List View
+        self.lvTxtOut = ft.ListView(expand = True)
+
+        # Composizione interfaccia
+        self._page.add(row1, row2, row3, self.lvTxtOut )
+
+
         self._page.update()
 
     @property
